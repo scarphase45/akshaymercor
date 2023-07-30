@@ -28,3 +28,16 @@ class OpenAI:
             max_tokens=max_tokens,
         )
         return response["choices"][0]["message"]["content"]
+    def newimage(
+        cls,
+        system_prompt: str,
+    ):
+        assert cls.api_key is not None, "OpenAI API key is not set"
+        openai.api_key = cls.api_key
+
+        response = openai.Image.create(
+            prompt=system_prompt,
+            n=1,
+            size="1024x1024"
+        )
+        return response["data"][0]["url"]
