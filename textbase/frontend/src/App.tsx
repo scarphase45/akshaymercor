@@ -7,6 +7,18 @@ type Message = {
   role: "user" | "assistant";
 };
 
+function isValidHttpUrl(string : string) {
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
 function ChatMessage(props: { message: Message }) {
   if (props.message.role === "assistant") {
     return (
@@ -16,7 +28,9 @@ function ChatMessage(props: { message: Message }) {
             A
           </div>
           <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl text-left">
-            <div>{props.message.content}</div>
+            <div>{ isValidHttpUrl(props.message.content)?
+            <img src={props.message.content} />
+            :props.message.content }</div>
           </div>
         </div>
       </div>
@@ -71,12 +85,14 @@ function App() {
       const content: { botResponse: Message; newState: object } =
         await response.json();
       console.log(content);
+      console.log('data',content)
       setHistory([...history, content.botResponse]);
       setBotState(content.newState);
     } catch (error) {
       console.error("Failed to send chat history:", error);
     }
   }
+  
 
   return (
     <div className="flex h-screen antialiased text-gray-800">

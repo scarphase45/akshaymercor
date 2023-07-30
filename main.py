@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 
 
 # Load your OpenAI API key
-models.OpenAI.api_key = "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"
+models.OpenAI.api_key = "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"
 # or from environment variable:
 # models.OpenAI.api_key = os.getenv("OPENAI_API_KEY")
 
 # Prompt for GPT-3.5 Turbo
-SYSTEM_PROMPT = """Hi what you are looking for"""
+SYSTEM_PROMPT = """Hi my name is Akshay"""
 
 
 
@@ -37,16 +37,12 @@ def on_message(message_history: List[Message], state: dict = None):
     user_input = message_history[-1].content.strip().lower()
 
     openai_instance = models.OpenAI()
+    inputVal = ['generate','create']
 
-    if 'generate' in user_input:
-        bot_response1 = openai_instance.newimage(
-        system_prompt=SYSTEM_PROMPT,
+    if ('generate' in user_input and 'picture' in user_input) or ('create' in user_input and 'picture' in user_input) :
+        bot_response = openai_instance.newimage(
+        system_prompt=user_input,
     )
-        image_response = requests.get(bot_response1)
-        image = Image.open(BytesIO(image_response.content))
-        plt.imshow(image)
-        plt.axis('off')  # Hide axes
-        bot_response = plt.show()
     else:
         # # Generate GPT-3.5 Turbo response
         bot_response = openai_instance.generate(
