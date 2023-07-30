@@ -84,8 +84,6 @@ function App() {
       });
       const content: { botResponse: Message; newState: object } =
         await response.json();
-      console.log(content);
-      console.log('data',content)
       setHistory([...history, content.botResponse]);
       setBotState(content.newState);
     } catch (error) {

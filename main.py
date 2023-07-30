@@ -3,15 +3,10 @@ from textbase.message import Message
 from textbase import models
 import os
 from typing import List
-from PIL import Image
-from io import BytesIO
-import requests
-from IPython.display import display
-import matplotlib.pyplot as plt
 
 
 # Load your OpenAI API key
-models.OpenAI.api_key = "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"
+models.OpenAI.api_key = "OPENAI KEY"
 # or from environment variable:
 # models.OpenAI.api_key = os.getenv("OPENAI_API_KEY")
 
