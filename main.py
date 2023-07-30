@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 
 # Load your OpenAI API key
-models.OpenAI.api_key = "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"
+models.OpenAI.api_key = "OPEN API KEY"
 # or from environment variable:
 # models.OpenAI.api_key = os.getenv("OPENAI_API_KEY")
 
